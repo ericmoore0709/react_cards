@@ -11,12 +11,14 @@ const useFlip = () => {
     return [isFacingUp, flipCard];
 }
 
-const useAxios = (url) => {
+const useAxios = (baseUrl) => {
     const [data, setData] = useState([]);
-    const addData = async () => {
-        const response = await axios.get(url);
+
+    const addData = async (endpoint = "") => {
+        const response = await axios.get(`${baseUrl}${endpoint}`);
         setData(data => [...data, { ...response.data, id: uuid() }]);
     };
+
     return [data, addData];
 }
 
